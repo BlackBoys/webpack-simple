@@ -1,18 +1,18 @@
 pipeline {
-    agent any
-    tools {
-        nodejs 'node6.10.0'
+  agent any
+  stages {
+    stage('Example') {
+      steps {
+        sh 'npm run build'
+      }
     }
-    stages {
-        stage('Example') {
-            steps {
-                sh 'npm run build'
-            }
-        }
-        stage('test') {
-            steps {
-                sh 'npm -verson'
-            }
-        }
+    stage('test') {
+      steps {
+        sh 'npm -v'
+      }
     }
+  }
+  tools {
+    nodejs 'node6.10.0'
+  }
 }
