@@ -5,7 +5,6 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "webpack-dev-server --env=dev --progress",
-    // "compile": "webpack --env=dev",
     "build": "npm install && npm run build:dist",
     "build:dev": "webpack --env=dev --progress --profile --colors",
     "build:dist": "webpack --env=prod --progress --profile --colors"
