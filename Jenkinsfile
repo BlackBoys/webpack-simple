@@ -15,7 +15,7 @@ pipeline {
         )
       }
     }
-    stage('test') {
+    stage('tozhongheng') {
       steps {
         sh 'npm -v'
       }
