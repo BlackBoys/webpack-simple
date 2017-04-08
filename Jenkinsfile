@@ -9,7 +9,7 @@ pipeline {
             
           },
           "\u90E8\u7F72": {
-            sh 'npm run build'
+            sh 'npm -v'
             
           }
         )
