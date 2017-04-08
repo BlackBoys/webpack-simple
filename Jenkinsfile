@@ -8,7 +8,7 @@ pipeline {
             sh 'npm run build'
             
           },
-          "\u90E8\u7F72": {
+          "\u663E\u793A\u7248\u672C": {
             sh 'npm -v'
             
           }
