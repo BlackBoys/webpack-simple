@@ -1,0 +1,28 @@
+.visitor-img {
+    
+        text-align: center;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    background: rgba(0,0,0,.4);
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.visitor-img .ui-icon-thumb:before {
+    font-size: 45px;
+    color: white;
+}
+
+.visitor-sign {
+            text-align: center;
+    height: 80px;
+    line-height: 129px;
+    width: 80%;
+    border: 1px solid #e5e6e7;
+    margin-top: 29px;
+    margin-right: 16px;
+    float: right;
+}

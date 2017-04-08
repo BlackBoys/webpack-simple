@@ -1,0 +1,20 @@
+<header class="ui-header ui-header-positive ui-border-b">
+	<i class="ui-icon-return" ng-click="goBack()"></i>
+	<h1>手动登记-ZHJD</h1>
+	<button ng-disabled="!visitor.planId" ui-sref="visiting-records-detail(visitor)" class="ui-btn">查询</button>
+</header>
+<section id="dashboard" class="ui-container">
+	<div class="ui-form ui-border-t">
+		<form action="#">
+			<div class="ui-form-item ui-border-b">
+				<label>
+                访客编码
+            </label>
+				<input ng-model="visitor.planId" type="text" placeholder="访客编码">
+				<!--<a href="#" class="ui-icon-close">
+				</a>-->
+			</div>
+
+		</form>
+	</div>
+</section>

@@ -1,0 +1,113 @@
+<header class="ui-header ui-header-positive ui-border-b">
+	<i class="ui-icon-return" onclick="history.back()"></i>
+	<h1>访客管理-ZHJD</h1>
+	<button ng-disabled="visitorForm.$invalid || visitorForm.$pristine" ng-click="addVistor()" class="ui-btn">提交</button>
+</header>
+<section id="visitor-apply" class="ui-container">
+	<div class="ui-form ui-border-t">
+		<form id="visitor-form"  name="visitorForm">
+			<div class="ui-form-item ui-border-b">
+				<label>
+                被访问人
+            </label>
+				<input ng-model="currentUser.name" type="text" required>
+			</div>
+			<div class="ui-form-item ui-border-b">
+				<label>
+                来访人信息
+            </label>
+
+			</div>
+			
+			<div class="ui-form-item ui-border-b">
+				<label>
+                姓名
+            </label>
+				<input ng-model="vistor.visitorName" type="text" required placeholder="姓名">
+
+			</div>
+			<div class="ui-form-item ui-border-b">
+				<label>
+                单位
+            </label>
+				<input ng-model="vistor.visitorDept" type="text" required placeholder="单位">
+
+			</div>
+			<div class="ui-form-item ui-border-b">
+				<label>
+                联系方式
+            </label>
+				<input ng-model="vistor.visitorPhone" type="text" required placeholder="请输入手机号码">
+
+			</div>
+			<div class="ui-form-item ui-border-b">
+				<label>
+                人数
+            </label>
+				<input ng-model="vistor.visitorNumber" type="number" required placeholder="人数">
+
+			</div>
+			<div class="ui-form-item ui-border-b">
+				<label>
+                车牌号
+            </label>
+				<input ng-model="vistor.carId" type="text" required placeholder="车牌号,无车填无">
+
+			</div>
+			<div class="ui-form-item ui-border-b">
+				<label>证件类型</label>
+				<div class="ui-select">
+					<select ng-model="vistor.visitorIdType">
+                    <option value="ID" selected>身份证</option>
+                    <option value="N">其他</option>
+                </select>
+				</div>
+			</div>
+			<div class="ui-form-item ui-border-b">
+				<label>
+                证件号
+            </label>
+				<input ng-model="vistor.visitorId" required type="text" placeholder="证件号">
+
+			</div>
+			<div class="ui-form-item ui-border-b">
+				<label>
+                携带物品
+            </label>
+				<input ng-model="vistor.belongings" required type="text" placeholder="携带物品信息,没有填无">
+
+			</div>
+			<!--<div class="ui-form-item ui-form-item-checkbox ui-border-b">
+				<label class="ui-checkbox">
+                <input type="checkbox">
+            </label>
+				<p>携带物品</p>
+
+			</div>-->
+			<div class="ui-form-item ui-border-b">
+				<label>
+                计划来访时间
+            </label>
+
+				<input moment-picker="input.planinTime" required readonly locale="zh-cn" ng-model="vistor.planinTimes" format="YYYY年MM月DD日HH时">
+
+			</div>
+			<div class="ui-form-item ui-border-b">
+				<label>
+                计划离开时间
+            </label>
+
+				<input moment-picker="input.planoutTime" required readonly locale="zh-cn" ng-model="vistor.planoutTimes" format="YYYY年MM月DD日HH时">
+
+			</div>
+			<!--<div class="ui-form-item ui-form-item-l ui-border-b">
+				<label class="ui-border-r">
+                中国 +86
+            </label>
+				<input type="text" placeholder="请输入手机号码">
+				<a href="#" class="ui-icon-close">
+				</a>
+			</div>-->
+		</form>
+	</div>
+</section>

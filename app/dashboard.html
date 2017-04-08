@@ -1,0 +1,27 @@
+<header class="ui-header ui-header-positive ui-border-b">
+    <!--<i class="ui-icon-return" ng-click="goBack()"></i>-->
+    <h1>访客管理-ZHJD</h1>
+    <!--<button class="ui-btn">回首页</button>-->
+</header>
+<section id="dashboard" class="ui-container">
+    <ul class="ui-row ui-whitespace dashboard-content">
+        <li class="ui-col ui-col-50"><button ui-sref="visitor-apply" class="ui-btn-lg ui-btn-primary">
+        访客申请
+    </button></li>
+        <li class="ui-col ui-col-50"><button ui-sref="visiting-records" class="ui-btn-lg ui-btn-primary">
+        来访记录
+    </button></li>
+        <li class="ui-col ui-col-50"><button ng-click="scan('register')" class="ui-btn-lg ui-btn-primary">
+        访客扫码登记
+    </button></li>
+        <li class="ui-col ui-col-50"><button ui-sref="code-log" class="ui-btn-lg ui-btn-primary">
+        访客编码登记
+    </button></li>
+        <li class="ui-col ui-col-50"><button ng-click="scan('leave')" class="ui-btn-lg ui-btn-primary">
+        访客扫码离开
+    </button></li>
+        <li class="ui-col ui-col-50"><button class="ui-btn-lg ui-btn-primary">
+        帮助
+    </button></li>
+    </ul>
+</section>

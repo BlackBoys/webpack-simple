@@ -1,0 +1,124 @@
+<header class="ui-header ui-header-positive ui-border-b">
+    <i class="ui-icon-return" onclick="history.back()"></i>
+    <h1>来访信息-ZHJD</h1>
+    <button ng-click="showdialog()" ng-if="$stateParams.type=='register'" class="ui-btn">准许进入</button>
+    <button ng-click="showdialog()" ng-if="$stateParams.type=='leave'" class="ui-btn">准许离开</button>
+
+</header>
+<section class="ui-container">
+
+    <div class="ui-form ui-border-t">
+        <form id="visitor-form" action="#">
+             <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">被访问人</label>
+                <input ng-model="record.userName" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">来访编号</label>
+                <input ng-model="record.planId" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">姓名</label>
+                <input ng-model="record.visitorName" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">单位</label>
+                <input ng-model="record.visitorDept" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">联系方式</label>
+                <input ng-model="record.visitorPhone" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">人数</label>
+                <input ng-model="record.visitorNumber" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">车牌号</label>
+                <input ng-model="record.carId" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">证件类型</label>
+                <div class="ui-select">
+                    <select ng-model="record.visitorIdType" disabled="disabled">
+                    <option value="ID">身份证</option>
+                    <option value="N">其他</option>
+                </select>
+                </div>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">证件号</label>
+                <input ng-model="record.visitorId" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">携带物品</label>
+                <input ng-model="record.belongings" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">计划来访时间</label>
+                <input class="form-time" value="{{record.planinTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">计划离开时间</label>
+                <input class="form-time" value="{{record.planoutTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">实际来访时间</label>
+                <input class="form-time" value="{{record.checkinTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="#">实际离开时间</label>
+                <input class="form-time" value="{{record.checkoutTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly>
+            </div>
+            <!--<div class="ui-form-item ui-form-item-checkbox ui-border-b">
+            <label class="ui-checkbox">
+                <input type="checkbox">
+            </label>
+           <p>携带物品</p>
+            
+            
+        </div>-->
+            <!--<div class="ui-form-item ui-form-item-show ui-border-b">
+            <label for="#">来访时间</label>
+            <input type="text" value="{{record.planinTime | date:'yyyy年MM月dd日HH时'}}" readonly>
+        </div>-->
+        </form>
+        <ul class="ui-row">
+            <li class="ui-col ui-col-33">
+                <div class="visitor-img"><i style="line-height: 100px" class="ui-icon-thumb"></i></div>
+            </li>
+            <li class="ui-col ui-col-67">
+                <div class="visitor-sign">接待人签字</div>
+            </li>
+        </ul>
+    </div>
+
+</section>
+<section>
+    <div class="ui-dialog" ng-class="{'show':dialogshow}">
+        <div class="ui-dialog-cnt">
+            <!--<header class="ui-dialog-hd ui-border-b">
+                <h3>提示</h3>
+                <i class="ui-dialog-close" data-role="button"></i>
+            </header>-->
+            <div class="ui-dialog-bd">
+                <h4 ng-if="$stateParams.type=='register'">准许进入吗?</h4>
+                <h4 ng-if="$stateParams.type=='leave'">准许离开吗?</h4>
+                <!--<div>准许进入吗?</div>-->
+            </div>
+            <div class="ui-dialog-ft">
+                <button ng-click="dialogshow=false" type="button">取消</button>
+                <button ng-if="$stateParams.type=='register'" ng-click="register($stateParams.planId)" type="button">确认</button>
+                <button ng-if="$stateParams.type=='leave'" ng-click="leave($stateParams.planId)" type="button">确认</button>
+            </div>
+        </div>
+    </div>
+</section>
+<!--<section class="ui-placehold-wrap">
+    <div class="ui-placehold">
+        <ul class="ui-row">
+            <li class="ui-col ui-col-50">50</li>
+            <li class="ui-col ui-col-50">50</li>
+        </ul>
+    </div>
+</section>-->

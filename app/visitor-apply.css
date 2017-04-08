@@ -1,0 +1,15 @@
+#visitor-form label{
+    min-width: 100px;
+}
+
+#visitor-form input {
+    padding-left: 111px;
+}
+
+#visitor-form .moment-picker-input{
+    padding-left: 111px;
+}
+
+#visitor-form .ui-select{
+    margin-left: 111px;
+}

@@ -1,0 +1,15 @@
+<header class="ui-header ui-header-positive ui-border-b">
+	<i class="ui-icon-return" onclick="history.back()"></i>
+	<h1>访客管理-ZHJD</h1>
+	<button class="ui-btn" locale="zh-cn" format="YYYY-MM-DD" today="true" moment-picker="search.planinTimes">筛选</button>
+</header>
+<section class="ui-container">
+
+<ul class="ui-list ui-list-text ui-list-link ui-border-tb">
+    <li ui-sref="visiting-records-detail(record)" ng-repeat="record in records" class="ui-border-t">
+        <h4 class="ui-nowrap">{{record.visitorName}}</h4>
+        <div class="ui-txt-info list-time">{{record.planinTime | date:'yyyy-MM-dd'}}</div>
+        <div class="ui-txt-info">{{getType(record.status)}}</div>
+    </li>
+</ul>
+</section>

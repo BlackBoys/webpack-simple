@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="App">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title data-ng-bind="$state.current.data.pageTitle"></title>
+
+    <!--<link rel="stylesheet" href="../css/frozen.css">-->
+</head>
+
+<body ontouchstart>
+
+    <div ui-view=""></div>
+    <!--<script src="bundle.js"></script>-->
+    <!--<script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>-->
+        <script src="https://cdn.bootcss.com/URI.js/1.18.5/URI.min.js"></script>
+        <!--<script type="text/javascript">
+		var uri=new URI(window.location);
+		console.dir(uri.search(true));-->
+	</script>
+    <script>
+        // (function (){
+        //     var tab = new fz.Scroll('.ui-tab', {
+        //         role: 'tab',
+        //         autoplay: true,
+        //         interval: 3000
+        //     });
+        //     /* 滑动开始前 */
+        //     tab.on('beforeScrollStart', function(fromIndex, toIndex) {
+        //         console.log(fromIndex,toIndex);// from 为当前页，to 为下一页
+        //     })
+        // })();
+    </script>
+    <div ng-spinner-bar class="ui-loading-block show">
+        <div class="ui-loading-cnt">
+            <i class="ui-loading-bright"></i>
+            <p>正在加载中...</p>
+        </div>
+    </div>
+    <!--<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261654137'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1261654137%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>-->
+</body>
+
+</html>

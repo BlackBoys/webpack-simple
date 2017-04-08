@@ -1,0 +1,15 @@
+header .moment-picker {
+    position:static;
+}
+
+header .moment-picker-container {
+    width: 100%;
+}
+
+.ui-list .list-time {
+    margin-right: 11px;
+}
+
+/*header .moment-picker th:first-child,header .moment-picker th:last-child {
+    width: 5em;
+}*/

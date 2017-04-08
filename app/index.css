@@ -1,0 +1,96 @@
+/* 主页  */
+
+/* 定义头部信息  */
+.page-header{
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	height: 1rem;
+	line-height: 1rem;
+}
+
+/* 按钮组  */
+.buttonGroup{
+	margin: 1.5rem 0 0 1rem;	
+}
+
+/* 功能按钮  */
+.row{
+	margin-top: 1rem;
+	
+}
+
+/* 左侧按钮  */
+.btn1{
+	width: 2.5rem;
+	height: 1.5rem;
+}
+
+/* 右侧按钮  */
+.btn2{
+	width: 2.5rem;
+	height: 1.5rem;
+	margin-left: 1rem;
+}
+
+/* 访客申请  */
+
+/* 回退主页按钮  */
+.rtn{
+	border: none;
+	position: absolute;
+	left: 0;
+	padding-top: 10px;
+}
+
+/* 提交按钮  */
+.smt{
+	position: absolute;
+	border: none;
+	right: 0;
+	margin-top: 5px;
+}
+form{
+	text-align: left;
+}
+label{
+	margin: 0;
+	padding-left: 0.5rem;
+	height: 1rem;
+	line-height: 1rem;
+}
+hr{
+	margin: 0;
+	padding: 0;
+}
+.fGroup{
+	margin-bottom: 10px;
+}
+.fGroup label{
+	float: left;
+	padding-right: 0.5rem;
+	text-align: center;
+}
+.fGroup input{
+	width: 5rem;
+	padding: 0;
+	margin-left: 1rem;
+}
+
+/* 二维码   */
+.qrcode{
+	border: 1px solid black;
+	width: 2rem;
+	height: 2rem;
+	margin-top: -0.5rem;
+	margin-left: 0.5rem;
+	float: left;
+}
+/* 接待人签字  */
+.signature{
+	border: 1px solid black;
+	width: 3.5rem;
+	margin-left: 3rem;
+	height: 1.5rem;
+	margin-top: 1rem;
+}
