@@ -3,7 +3,16 @@ pipeline {
   stages {
     stage('Example') {
       steps {
-        sh 'npm run build'
+        parallel(
+          "Example": {
+            sh 'npm run build'
+            
+          },
+          "\u90E8\u7F72": {
+            sh 'npm run build'
+            
+          }
+        )
       }
     }
     stage('test') {
