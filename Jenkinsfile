@@ -17,7 +17,7 @@ pipeline {
     }
     stage('tozhongheng') {
       steps {
-        sh 'npm -v'
+        sh 'cp -rf ./dist/* /zhongheng'
       }
     }
   }
