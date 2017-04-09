@@ -5,7 +5,7 @@ import 'babel-polyfill';
 // import "imports-loader?$=jquery!bootstrap";
 // import "imports-loader?$=jquery!./bootstrap-datetimepicker.min";
 import "angular";
-// import "angular-animate";
+import "angular-animate";
 import "angular-ui-router";
 // import "angular-ui-bootstrap";
 // import "bootstrap/dist/css/bootstrap.css";
@@ -45,7 +45,7 @@ import "./app";
 function importFactory (r) {
   r.keys().forEach(r);
 }
-importFactory(require.context('./', true, /\.factory.js$|\.contant.js$|\.directive.js$|\.service.js$|\.controller.js$/));
+importFactory(require.context('./', true, /\.factory.js$|\.contant.js$|\.directive.js$|\.service.js$|\.controller.js$|\.component.js$/));
 
 // function importContant (r) {
 //   r.keys().forEach(r);

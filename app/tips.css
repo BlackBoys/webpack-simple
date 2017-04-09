@@ -1,0 +1,7 @@
+.ui-poptips{
+  transition: all linear 0.5s;
+}
+.ui-poptips.ng-hide{
+    opacity: 0;
+    top: -40px;
+}

@@ -2,7 +2,7 @@
 // import 'yun-ui/dist/yun/index.css';
 import XuntongJSBridge from "XuntongJSBridge";
 
-var App = angular.module('App', ['ui.router', 'moment-picker']);
+var App = angular.module('App', ['ui.router', 'moment-picker','ngAnimate']);
 
 angular.module("App").config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
     // Redirect any unmatched url
