@@ -15,7 +15,7 @@ pipeline {
         )
       }
     }
-    stage('tozhongheng') {
+    stage('部署') {
       steps {
         sh 'cp -rf ./dist/* /zhongheng'
       }
