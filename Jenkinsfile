@@ -4,7 +4,7 @@ pipeline {
     stage('Example9') {
       steps {
         parallel(
-          "Example": {
+          "Example1": {
             sh 'npm run build'
             
           },
