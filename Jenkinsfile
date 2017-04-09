@@ -15,7 +15,7 @@ pipeline {
         )
       }
     }
-    stage('部署') {
+    stage('tonginx') {
       steps {
         sh 'cp -rf ./dist/* /zhongheng'
       }
