@@ -5,10 +5,7 @@ angular.module('App').factory('myHttpInterceptor', ['$q', 'loadingFactory', 'tip
     'request': function (config) {
       // do something on success
       loadingFactory.loading.addClass('show');
-      $timeout(function(){
-        tipsFactroy.show("网络请求失败", 'error', 1500);
-      },1000)
-      
+
       return config;
     },
 
@@ -39,6 +36,8 @@ angular.module('App').factory('myHttpInterceptor', ['$q', 'loadingFactory', 'tip
       //     return responseOrNewPromise
       //   }
       loadingFactory.loading.removeClass('show');
+      tipsFactroy.show("网络请求失败", 'error', 1500);
+
       return $q.reject(rejection);
     }
   };
