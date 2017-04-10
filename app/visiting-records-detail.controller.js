@@ -2,8 +2,8 @@ import XuntongJSBridge from "XuntongJSBridge";
 import "./visiting-records-detail.css";
 angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$scope', '$stateParams', 'domain', '$state', function ($http, $scope, $stateParams, domain, $state) {
     $scope.getDetail = function (planId) {
-        $http.get(`${domain.zh}/visitor/selVisitorByPlanId?planId=${planId}`).success(function (data) {
-            $scope.record = data;
+        $http.get(`${domain.zh}/visitor/selVisitorByPlanId?planId=${planId}`).success(function (rs) {
+            $scope.record = rs.data;
         }).error(function () {
 
         });

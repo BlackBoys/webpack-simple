@@ -48,8 +48,8 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
     $rootScope.goBack = function () {
         $window.history.back();
     }
-
     XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+        // alert(angular.toJson(result));
         $rootScope.currentUser = result.data;
 
     });

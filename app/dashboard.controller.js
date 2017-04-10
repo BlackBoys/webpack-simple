@@ -21,7 +21,7 @@ angular.module('App').controller('DashboardController', ['$http', '$scope', '$ro
     // })
     $scope.selectPerson = function () {
         XuntongJSBridge.call('selectPerson', { 'pType': '1' }, function (result) {
-            alert(JSON.stringify(result));
+            // alert(JSON.stringify(result));
         });
     }
 
