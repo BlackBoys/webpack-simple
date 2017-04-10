@@ -1,4 +1,4 @@
 angular.module('App')
     .constant('domain', {
-        zh: 'http://192.168.137.184:8080', //纵横项目
+        zh: 'http://10.0.24.157:8080', //纵横项目
     })
