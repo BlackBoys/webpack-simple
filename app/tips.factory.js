@@ -5,7 +5,7 @@ angular.module('App').factory('tipsFactroy', ['$window', '$rootScope', '$timeout
         tipsFactroy.isshow = true;
         tipsFactroy.message = message;
         tipsFactroy.type = type;
-        $timeout(function () '{
+        $timeout(function (){
             tipsFactroy.isshow = false;
         }, time)
     };
