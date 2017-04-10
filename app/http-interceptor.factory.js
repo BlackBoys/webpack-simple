@@ -42,7 +42,7 @@ angular.module('App').factory('myHttpInterceptor', ['$q', 'loadingFactory', 'tip
       //   if (canRecover(rejection)) {
       //     return responseOrNewPromise
       //   }
-      alert(angular.toJson(rejection));
+      // alert(angular.toJson(rejection));
       loadingFactory.loading.removeClass('show');
       XuntongJSBridge.call('getNetworkType', {}, function (result) {
         if (result.data.network_type == 'fail') tipsFactroy.show("您的网络连接已断开", 'error', 3000);

@@ -62,7 +62,7 @@ module.exports = function (env) {
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'manifest' //But since there are no more common modules between them we end up with just the runtime code included in the manifest file
             }),
-            new webpack.optimize.UglifyJsPlugin(),
+            // new webpack.optimize.UglifyJsPlugin(),
             new ExtractTextPlugin("[name].[chunkhash].css")
         ]
     }

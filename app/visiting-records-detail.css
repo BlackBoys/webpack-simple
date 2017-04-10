@@ -11,9 +11,9 @@
     float: left;
 }
 
-.visitor-img .ui-icon-thumb:before {
-    font-size: 45px;
-    color: white;
+.visitor-img img {
+    width: 100%;
+    height: auto;
 }
 
 .visitor-sign {
