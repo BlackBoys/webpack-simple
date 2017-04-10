@@ -48,6 +48,12 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
     $rootScope.goBack = function () {
         $window.history.back();
     }
+
+    XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+        $rootScope.currentUser = result.data;
+
+    });
+
     $rootScope.$on('$stateChangeSuccess',
         function (event, toState, toParams, fromState, fromParams) {
             // do something

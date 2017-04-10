@@ -8,8 +8,10 @@ angular.module('App').controller('VisitingRecordsController', ['$http', '$scope'
         });
     }
 
-    $scope.search = {};
 
+    $scope.search = {
+        handlingOpenid:$scope.currentUser.openId,
+    };
     $scope.getList = function(planinTime){
         var params = {
             currentPage:1,
