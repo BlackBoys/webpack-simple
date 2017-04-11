@@ -18,7 +18,7 @@ angular.module('App').controller('VisitingRecordsController', ['$http', '$scope'
             pageSize:10
         };
         $http.get(`${domain.zh}/visitor/visitList`,{params:$scope.search}).success(function(data){
-            console.dir(data);
+            alert(angular.toJson(data));
             $scope.records = data;
         }).error(function(e){
             console.dir(e);
