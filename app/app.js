@@ -1,8 +1,8 @@
 // import yun from 'yun-ui';
 // import 'yun-ui/dist/yun/index.css';
 import XuntongJSBridge from "XuntongJSBridge";
-
-var App = angular.module('App', ['ui.router', 'moment-picker','ngAnimate']);
+import domtoimage from 'dom-to-image';
+var App = angular.module('App', ['ui.router', 'moment-picker', 'ngAnimate']);
 
 angular.module("App").config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
     // Redirect any unmatched url
@@ -43,7 +43,7 @@ angular.module("App").config(['$stateProvider', '$urlRouterProvider', '$httpProv
 }]);
 
 
-angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stateParams', function ($rootScope, $window, $state, $timeout, $stateParams) {
+angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stateParams', 'ImgFactory', 'domain', '$http', function ($rootScope, $window, $state, $timeout, $stateParams, ImgFactory, domain, $http) {
     $rootScope.$stateParams = $stateParams;
     $rootScope.goBack = function () {
         $window.history.back();
@@ -54,14 +54,8 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
 
     });
 
-    // XuntongJSBridge.call('openInBrowser',
-    //                     { 'url': "http://www.baidu.com" }, //自定义链接
-    //                     function (result) {
-    //                         alert(angular.toJson(result));
-    //                     }
-    //                 );
 
-    $rootScope.$on('$stateChangeSuccess',
+    $rootScope.$on('$stateChangeStart',
         function (event, toState, toParams, fromState, fromParams) {
             // do something
             $timeout(function () {
@@ -69,7 +63,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
             });
 
         });
-        
+
     // XuntongJSBridge.call('hideWebViewTitle');//隐藏页面标题
     // XuntongJSBridge.call('hideOptionMenu');
     // XuntongJSBridge.call('defback',
@@ -83,36 +77,66 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
     //         }
     //     }
     // );
-    // XuntongJSBridge.call('createPop',
-    //     {
-    //         'popTitle': '提交',
-    //         'popTitleCallBackId': '123',
-    //         'items': [
-    //             // { 'text': '自定义条目1', 'callBackId': 'callback1' },
-    //             // { 'text': '自定义条目2', 'callBackId': 'callback2' },
-    //         ],
-    //         // 'menuList': ['forward', 'refresh', 'share', 'openWithBrowser'],
-    //         // 'shareData': {
-    //         //     'isShowExt': '转发时是否显示商务伙伴，true or false，默认为true',
-    //         //     'title': '分享或者转发的标题',
-    //         //     'url': '分享的链接，若空则取当前的url',
-    //         //     'description': '分享或者转发的内容',
-    //         //     'appLogo': '轻应用Logo，base64数据',
-    //         //     'appName': '轻应用名称'
-    //         // }
-    //     },
-    //     function (result) {
-    //         if (result.success == true || result.success == 'true') {
-    //             var callBackId = result.data ? result.data.callBackId : '';
-    //             if (callBackId == 'callback1') {
-    //                 callback1();
-    //             }
-    //         }
-    //     }
-    // );
+    XuntongJSBridge.call('createPop',
+        {
+            'popTitle': '',
+            'popTitleCallBackId': '123',
+            'items': [
+                { 'text': '保存为图片', 'callBackId': 'callback1' },
+            ],
+            'menuList': ['refresh'],
+            // 'shareData': {
+            //     'isShowExt': '转发时是否显示商务伙伴，true or false，默认为true',
+            //     'title': '分享或者转发的标题',
+            //     'url': '分享的链接，若空则取当前的url',
+            //     'description': '分享或者转发的内容',
+            //     'appLogo': '轻应用Logo，base64数据',
+            //     'appName': '轻应用名称'
+            // }
+        },
+        function (result) {
+            if (result.success == true || result.success == 'true') {
+                var callBackId = result.data ? result.data.callBackId : '';
+                if (callBackId == 'callback1') {
+                    var putPolicy = {
+                        scope: 'cloudhub',
+                        deadline: Date.now() + 3600 * 60,
+                        returnBody: `{
+                        "name": $(fname),
+                        "size": $(fsize),
+                        "w": $(imageInfo.width),
+                        "h": $(imageInfo.height),
+                        "hash": $(etag)
+                        }`
+                    };
+                    var fd = new FormData();
+                    var uploadUrl = "http://up-z1.qiniu.com";
+                    var upload_token = ImgFactory.genUpToken('0Q5EBq9LO_XDOw4Yl7sKlFtYbIE6CY5ezynByzGF', 'BifNlHBRUx9SwUZ8CocbUGaH8rPZ6ekJ46rZWQwl', putPolicy);
+                    var node;
+                    if (document.getElementById('ui-container')) node = document.getElementById('ui-container');
+                    else node = document.getElementsByTagName('html')[0];
+                    domtoimage.toBlob(node)
+                        .then(function (blob) {
+                            fd.append("token", upload_token);
+                            fd.append("file", blob);
+                            return $http.post(domain.qiniuUpload, fd, {
+                                // withCredentials: true,
+                                headers: { 'Content-Type': undefined },
+                                transformRequest: angular.identity
+                            })
+                        }).then(function (rs) {
+                            XuntongJSBridge.call('previewImage',
+                                {
+                                    current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
+                                    urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
+                                }, function (result) {
 
-    // function callback1() {
-    //     alert('callback1')
-    // }
-    
+                                }
+                            );
+                        });
+                }
+            }
+        }
+    );
+
 }]);
