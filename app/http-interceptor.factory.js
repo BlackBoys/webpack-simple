@@ -5,8 +5,8 @@ angular.module('App').factory('myHttpInterceptor', ['$q', 'loadingFactory', 'tip
     // optional method
     'request': function (config) {
       // do something on success
-      if(!loadingFactory.loading.hasClass('show')){
-          loadingFactory.loading.addClass('show');
+      if (!loadingFactory.loading.hasClass('show')) {
+        loadingFactory.loading.addClass('show');
       };
       return config;
     },
@@ -46,10 +46,11 @@ angular.module('App').factory('myHttpInterceptor', ['$q', 'loadingFactory', 'tip
       //   }
       // alert(angular.toJson(rejection));
       loadingFactory.loading.removeClass('show');
-      XuntongJSBridge.call('getNetworkType', {}, function (result) {
-        if (result.data.network_type == 'fail') tipsFactroy.show("您的网络连接已断开", 'error', 3000);
-        else tipsFactroy.show("程序异常,请联系管理员", 'error', 3000);
-      });
+      // XuntongJSBridge.call('getNetworkType', {}, function (result) {
+      //   if (result.data.network_type == 'fail') tipsFactroy.show("您的网络连接已断开", 'error', 3000);
+      // else 
+      tipsFactroy.show("程序异常,请联系管理员", 'error', 3000);
+      // });
       return $q.reject(rejection);
     }
   };
