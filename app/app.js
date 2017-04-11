@@ -113,7 +113,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                     var uploadUrl = "http://up-z1.qiniu.com";
                     var upload_token = ImgFactory.genUpToken('0Q5EBq9LO_XDOw4Yl7sKlFtYbIE6CY5ezynByzGF', 'BifNlHBRUx9SwUZ8CocbUGaH8rPZ6ekJ46rZWQwl', putPolicy);
                     var node;
-                    if (document.getElementById('ui-container-form')) node = document.getElementById('ui-container');
+                    if (document.getElementById('ui-container-form')) node = document.getElementById('ui-container-form');
                     else node = document.getElementsByTagName('html')[0];
                     domtoimage.toBlob(node)
                         .then(function (blob) {
