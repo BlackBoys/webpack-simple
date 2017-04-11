@@ -29,7 +29,7 @@ angular.module('App').factory('myHttpInterceptor', ['$q', 'loadingFactory', 'tip
     'response': function (response) {
       // do something on success
       loadingFactory.loading.removeClass('show');
-      if (response.data && response.data.data && !response.data.flag) {
+      if (response.data && response.data.data === null && response.data.flag === false) {
         tipsFactroy.show("程序异常,请联系管理员", 'error', 3000);
         return response;
       } else {

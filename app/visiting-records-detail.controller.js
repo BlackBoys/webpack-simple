@@ -3,6 +3,15 @@ import domtoimage from 'dom-to-image';
 import "./visiting-records-detail.css";
 import CryptoJS from "crypto-js";
 angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$scope', '$stateParams', 'domain', '$state', '$timeout', function ($http, $scope, $stateParams, domain, $state, $timeout) {
+    XuntongJSBridge.call('createPop', { popTitle: '保存图片', popTitleCallBackId: 'saveas' }, function (result) {
+        if (result.success == true || result.success == 'true') {
+            // var callBackId = result.data ? result.data.callBackId : '';
+            // if (callBackId == 'saveas') {
+                $scope.uploadFile();
+            // }
+        }
+    });
+
     $scope.getDetail = function (planId) {
         $http.get(`${domain.zh}/visitor/selVisitorByPlanId?planId=${planId}`).success(function (rs) {
             $scope.record = rs.data;
@@ -185,7 +194,7 @@ angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$
         return upload_token;
     };
 
-    $scope.uploadFile = function (files) {
+    $scope.uploadFile = function () {
         var fd = new FormData();
         var uploadUrl = "http://up-z1.qiniu.com";
         var putPolicy = {
@@ -202,19 +211,27 @@ angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$
         var upload_token = genUpToken('0Q5EBq9LO_XDOw4Yl7sKlFtYbIE6CY5ezynByzGF', 'BifNlHBRUx9SwUZ8CocbUGaH8rPZ6ekJ46rZWQwl', putPolicy);
 
         //Take the first selected file
-        var node = document.getElementsByTagName('html')[0];
+        var node = document.getElementById('ui-container');
         domtoimage.toBlob(node)
             .then(function (blob) {
                 // window.saveAs(blob, 'my-node.png');
                 fd.append("token", upload_token);
                 fd.append("file", blob);
-                return $http.post(uploadUrl, fd, {
-                    withCredentials: true,
+                return $http.post(domain.qiniuUpload, fd, {
+                    // withCredentials: true,
                     headers: { 'Content-Type': undefined },
                     transformRequest: angular.identity
                 })
             }).then(function (rs) {
-                alert('上传成功!');
+                // alert('上传成功!');
+                XuntongJSBridge.call('previewImage',
+                    {
+                        current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
+                        urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
+                    }, function (result) {
+
+                    }
+                );
             });
 
         // $http.post(uploadUrl, fd, {
