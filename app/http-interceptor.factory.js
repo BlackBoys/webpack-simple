@@ -5,7 +5,9 @@ angular.module('App').factory('myHttpInterceptor', ['$q', 'loadingFactory', 'tip
     // optional method
     'request': function (config) {
       // do something on success
-      loadingFactory.loading.addClass('show');
+      if(!loadingFactory.loading.hasClass('show')){
+          loadingFactory.loading.addClass('show');
+      };
       return config;
     },
 

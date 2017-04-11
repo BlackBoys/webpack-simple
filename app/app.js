@@ -54,6 +54,13 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
 
     });
 
+    // XuntongJSBridge.call('openInBrowser',
+    //                     { 'url': "http://www.baidu.com" }, //自定义链接
+    //                     function (result) {
+    //                         alert(angular.toJson(result));
+    //                     }
+    //                 );
+
     $rootScope.$on('$stateChangeSuccess',
         function (event, toState, toParams, fromState, fromParams) {
             // do something
@@ -61,7 +68,8 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                 XuntongJSBridge.call('setWebViewTitle', { 'title': $state.current.data.pageTitle });
             });
 
-        })
+        });
+        
     // XuntongJSBridge.call('hideWebViewTitle');//隐藏页面标题
     // XuntongJSBridge.call('hideOptionMenu');
     // XuntongJSBridge.call('defback',
@@ -106,4 +114,5 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
     // function callback1() {
     //     alert('callback1')
     // }
+    
 }]);

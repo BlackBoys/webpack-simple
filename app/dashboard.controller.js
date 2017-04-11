@@ -8,7 +8,9 @@ angular.module('App').controller('DashboardController', ['$http', '$scope', '$ro
         });
     }
 
-
+    $scope.toPage = function(){
+        window.location.href="https://eligrey.com/demos/FileSaver.js/";
+    }
 
     // $(".ui-dialog").dialog("show");
     // var myDialog = $.dialog({
