@@ -5,7 +5,6 @@ angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$
     $scope.getDetail = function (planId) {
         $http.get(`${domain.zh}/visitor/selVisitorByPlanId?planId=${planId}`).success(function (rs) {
             $scope.record = rs.data;
-            imgFactory();
         }).error(function () {
 
         });
