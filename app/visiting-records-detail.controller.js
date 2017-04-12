@@ -1,6 +1,6 @@
 import XuntongJSBridge from "XuntongJSBridge";
 import "./visiting-records-detail.css";
-angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$scope', '$stateParams', 'domain', '$state', '$timeout', function ($http, $scope, $stateParams, domain, $state, $timeout) {
+angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$scope', '$stateParams', 'domain', '$state', '$timeout', 'tipsFactroy', function ($http, $scope, $stateParams, domain, $state, $timeout, tipsFactroy) {
 
     $scope.getDetail = function (planId) {
         $http.get(`${domain.zh}/visitor/selVisitorByPlanId?planId=${planId}`).success(function (rs) {
@@ -9,13 +9,14 @@ angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$
 
         });
     }
-   
+
 
     $scope.register = function (planId) {
         // alert(`${domain.zh}/visitor/updateCheckintime?planId=${planId}`);
         $http.get(`${domain.zh}/visitor/updateCheckintime?planId=${planId}`).success(function (data) {
             // alert(angular.toJson(data));
-            $state.go('visiting-records');
+            if (data.flag == true) $state.go('visiting-records');
+            else tipsFactroy.show("程序异常,请联系管理员", 'error', 3000);
         }).error();
     }
 
@@ -29,7 +30,8 @@ angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$
         // alert(`${domain.zh}/visitor/updateCheckouttime?planId=${planId}`);
         $http.get(`${domain.zh}/visitor/updateCheckouttime?planId=${planId}`).success(function (data) {
             // alert(angular.toJson(data));
-            $state.go('visiting-records');
+            if (data.flag == true) $state.go('visiting-records');
+            else tipsFactroy.show("程序异常,请联系管理员", 'error', 3000);
         }).error();
     }
 
@@ -47,6 +49,6 @@ angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$
     // $timeout(function () {
 
     // }, 5000);
-    
+
 
 }]);
