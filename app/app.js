@@ -55,7 +55,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
     });
 
 
-    $rootScope.$on('$stateChangeStart',
+    $rootScope.$on('$stateChangeSuccess',
         function (event, toState, toParams, fromState, fromParams) {
             // do something
             $timeout(function () {
