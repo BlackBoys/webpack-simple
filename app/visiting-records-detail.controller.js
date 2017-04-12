@@ -12,6 +12,7 @@ angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$
    
 
     $scope.register = function (planId) {
+        alert(`${domain.zh}/visitor/updateCheckouttime?planId=${planId}`);
         $http.get(`${domain.zh}/visitor/updateCheckintime?planId=${planId}`).success(function (data) {
             // alert(angular.toJson(data));
             $state.go('visiting-records');
