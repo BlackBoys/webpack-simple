@@ -12,11 +12,8 @@ angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$
 
 
     $scope.register = function (planId) {
-        // alert(`${domain.zh}/visitor/updateCheckintime?planId=${planId}`);
         $http.get(`${domain.zh}/visitor/updateCheckintime?planId=${planId}`).success(function (data) {
-            // alert(angular.toJson(data));
-            if (data.flag == true) $state.go('visiting-records');
-            else tipsFactroy.show("程序异常,请联系管理员", 'error', 3000);
+            $state.go('visiting-records');
         }).error();
     }
 
@@ -27,11 +24,8 @@ angular.module('App').controller('VisitingRecordsDetailController', ['$http', '$
     // $scope.showdialog();
 
     $scope.leave = function (planId) {
-        // alert(`${domain.zh}/visitor/updateCheckouttime?planId=${planId}`);
         $http.get(`${domain.zh}/visitor/updateCheckouttime?planId=${planId}`).success(function (data) {
-            // alert(angular.toJson(data));
-            if (data.flag == true) $state.go('visiting-records');
-            else tipsFactroy.show("程序异常,请联系管理员", 'error', 3000);
+            $state.go('visiting-records');
         }).error();
     }
 
