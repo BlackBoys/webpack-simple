@@ -17,7 +17,7 @@ angular.module('App').factory('myHttpInterceptor', ['$q', 'loadingFactory', 'tip
       //   if (canRecover(rejection)) {
       //     return responseOrNewPromise
       //   }
-      tipsFactroy.show("请在云之家轻应用里打开应用", 'error', 3000);
+      // tipsFactroy.show("请在云之家轻应用里打开应用", 'warn', 3000);
       loadingFactory.loading.removeClass('show');
 
       return $q.reject(rejection);
@@ -30,7 +30,7 @@ angular.module('App').factory('myHttpInterceptor', ['$q', 'loadingFactory', 'tip
       // do something on success
       loadingFactory.loading.removeClass('show');
       if (response.data && response.data.data === null && response.data.flag === false) {
-        tipsFactroy.show("程序异常,请联系管理员", 'error', 3000);
+        tipsFactroy.show("程序异常,请联系管理员", 'warn', 3000);
         return response;
       } else {
         return response;
@@ -49,7 +49,7 @@ angular.module('App').factory('myHttpInterceptor', ['$q', 'loadingFactory', 'tip
       // XuntongJSBridge.call('getNetworkType', {}, function (result) {
       //   if (result.data.network_type == 'fail') tipsFactroy.show("您的网络连接已断开", 'error', 3000);
       // else 
-      tipsFactroy.show("程序异常,请联系管理员", 'error', 3000);
+      tipsFactroy.show("程序异常,请联系管理员", 'warn', 3000);
       // });
       return $q.reject(rejection);
     }
