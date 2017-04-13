@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Example222') {
+    stage('build') {
       steps {
         parallel(
           "compile": {
