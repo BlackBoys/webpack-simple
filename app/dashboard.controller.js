@@ -8,19 +8,10 @@ angular.module('App').controller('DashboardController', ['$http', '$scope', '$ro
         });
     }
 
-    $scope.toPage = function(){
-        window.location.href="https://eligrey.com/demos/FileSaver.js/";
-    }
+    let uri = new URI(window.location);
+    let ticket = uri.search(true).ticket;
+    
 
-    // $(".ui-dialog").dialog("show");
-    // var myDialog = $.dialog({
-    //     title: "温馨提示",
-    //     content: '温馨提示内容',
-    //     button: ["确认", "取消"]
-    // })
-    // myDialog.on("dialog:hide", function (e) {
-    //     // To do sth when dialog hide
-    // })
     $scope.selectPerson = function () {
         XuntongJSBridge.call('selectPerson', { 'pType': '1' }, function (result) {
             // alert(JSON.stringify(result));

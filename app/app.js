@@ -48,10 +48,18 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
     $rootScope.goBack = function () {
         $window.history.back();
     }
-    XuntongJSBridge.call('getPersonInfo', {}, function (result) {
-        // alert(angular.toJson(result));
-        $rootScope.currentUser = result.data;
+    // XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+    //     // alert(angular.toJson(result));
+    //     $rootScope.currentUser = result.data;
 
+    // });
+    $http.get('http://do.yunzhijia.com/openauth2/api/appAuth2').then(function (rs) {
+        let access_token = rs.data.data.access_token;
+        return $http.post('http://do.yunzhijia.com/openapi/third/v1/ticket/public/tickettocontext', { params: { access_token: access_token, ticket: ticket } });
+    }).then(function (rs) {
+        $rootScope.currentUser = rs.data;
+    }).catch(function () {
+        console.log('失败');
     });
 
 

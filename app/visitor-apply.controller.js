@@ -18,8 +18,8 @@ angular.module('App').controller('VisitorApplyController', ['$http', '$scope', '
         var serveData = angular.copy($scope.vistor);
         serveData.planinTimes = serveData.planinTimes.format('YYYY-MM-DD HH:mm:ss');
         serveData.planoutTimes = serveData.planoutTimes.format('YYYY-MM-DD HH:mm:ss');
-        serveData.handlingOpenid = $scope.currentUser.openId;
-        serveData.openid = $scope.currentUser.openId;
+        serveData.handlingOpenid = $scope.currentUser.openid;
+        serveData.openid = $scope.currentUser.openid;
         $http.get(`${domain.zh}/visitor/addVisitor`, { params: serveData }).success(function () {
             $state.go('visiting-records');
         }).error(function () {

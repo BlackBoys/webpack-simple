@@ -10,7 +10,7 @@ angular.module('App').controller('VisitingRecordsController', ['$http', '$scope'
 
 
     $scope.search = {
-        openid:$scope.currentUser.openId,
+        openid:$scope.currentUser.openid,
     };
     $scope.getList = function(planinTime){
         var params = {
