@@ -4,9 +4,8 @@ pipeline {
     stage('build') {
       steps {
         parallel(
-          "compile": {
+          "test": {
             sh 'npm run build'
-            sh 'node -v'
             
           },
           "\u663E\u793A\u7248\u672C": {
