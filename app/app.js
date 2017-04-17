@@ -9,41 +9,59 @@ angular.module("App").config(['$stateProvider', '$urlRouterProvider', '$httpProv
     $httpProvider.interceptors.push('myHttpInterceptor');
     $urlRouterProvider.otherwise("/dashboard");
     $stateProvider
+        .state('site', {
+            // url: "/site",
+            abstract: true,
+            template: '<div ui-view />',
+            // templateUrl: "site/site.html",
+            resolve: {
+                authorize: ['authorization',
+                    function (authorization) {
+                        return authorization.authorize();
+                    }
+                ]
+            }
+        })
         .state('dashboard', {
             url: "/dashboard?ticket",
+            parent: 'site',
             templateUrl: "dashboard.html",
-            data: { pageTitle: '访客管理-ZHJD' },
+            data: { pageTitle: '访客管理-ZHJD', roles: ['USER'] },
             controller: "DashboardController"
         })
 
         .state('visitor-apply', {
             url: "/visitor-apply",
+            parent: 'site',
             templateUrl: "visitor-apply.html",
-            data: { pageTitle: '访客申请-ZHJD' },
+            data: { pageTitle: '访客申请-ZHJD', roles: ['USER'] },
             controller: "VisitorApplyController"
         })
         .state('visiting-records', {
+            parent: 'site',
             url: "/visiting-records",
             templateUrl: "visiting-records.html",
-            data: { pageTitle: '来访记录-ZHJD' },
+            data: { pageTitle: '来访记录-ZHJD', roles: ['USER'] },
             controller: "VisitingRecordsController"
         })
         .state('visiting-records-detail', {
+            parent: 'site',
             url: "/visiting-records/:planId?type",
             templateUrl: "visiting-records-detail.html",
-            data: { pageTitle: '来访记录-ZHJD' },
+            data: { pageTitle: '来访记录-ZHJD', roles: ['USER'] },
             controller: "VisitingRecordsDetailController"
         })
         .state('code-log', {
+            parent: 'site',
             url: "/code-log",
             templateUrl: "code-log.html",
-            data: { pageTitle: '手动登记-ZHJD' },
+            data: { pageTitle: '手动登记-ZHJD', roles: ['USER'] },
             controller: "CodeLogController"
         })
 }]);
 
 
-angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stateParams', 'ImgFactory', 'domain', '$http', function ($rootScope, $window, $state, $timeout, $stateParams, ImgFactory, domain, $http) {
+angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stateParams', 'ImgFactory', 'domain', '$http', 'principal', 'authorization', function ($rootScope, $window, $state, $timeout, $stateParams, ImgFactory, domain, $http, principal, authorization) {
     $rootScope.$stateParams = $stateParams;
     $rootScope.goBack = function () {
         $window.history.back();
@@ -53,15 +71,19 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
     //     $rootScope.currentUser = result.data;
 
     // });
-    $http.get('http://do.yunzhijia.com/openauth2/api/appAuth2').then(function (rs) {
-        let access_token = rs.data.data.access_token;
-        return $http.post('http://do.yunzhijia.com/openapi/third/v1/ticket/public/tickettocontext', { params: { access_token: access_token, ticket: ticket } });
-    }).then(function (rs) {
-        $rootScope.currentUser = rs.data;
-    }).catch(function () {
-        console.log('失败');
-    });
-
+    $rootScope.$on('$stateChangeStart',
+        function (event, toState, toStateParams) {
+            // track the state the user wants to go to;
+            // authorization service needs this
+            $rootScope.toState = toState;
+            $rootScope.toStateParams = toStateParams;
+            //console.log(toState, toStateParams);
+            // if the principal is resolved, do an
+            // authorization check immediately. otherwise,
+            // it'll be done when the state it resolved.
+            if (principal.isIdentityResolved())
+                authorization.authorize();
+        });
 
     $rootScope.$on('$stateChangeSuccess',
         function (event, toState, toParams, fromState, fromParams) {
