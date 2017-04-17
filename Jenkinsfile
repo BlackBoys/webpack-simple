@@ -6,6 +6,7 @@ pipeline {
         parallel(
           "compile": {
             sh 'npm run build'
+            sh 'node -v'
             
           },
           "\u663E\u793A\u7248\u672C": {
@@ -18,6 +19,7 @@ pipeline {
     stage('tonginx') {
       steps {
         sh 'cp -rf ./dist/* /zhongheng'
+        timestamps()
       }
     }
   }
