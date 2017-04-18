@@ -21,7 +21,7 @@
       if (!callback) return;
       callback.apply(null, [message]);
     } catch (e) {
-      alert(e)
+      // alert(e)
     }
   }
 
