@@ -265,20 +265,35 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                     else node = document.getElementsByTagName('html')[0];
                     alert(angular.toJson(node));
                     alert(angular.toJson(domtoimage));
-                    html2canvas(document.body).then(function (canvas) {
+                    html2canvas(node).then(function (canvas) {
                         console.dir(canvas);
                         canvas.toBlob(function (blob) {
                             alert(blob);
                             fd.append("token", upload_token);
-                                    fd.append("file", blob);
-                                    return $http.post(domain.qiniuUpload, fd, {
-                                        // withCredentials: true,
-                                        headers: { 'Content-Type': undefined },
-                                        transformRequest: angular.identity
-                                    })
-                             });
+                            fd.append("file", blob);
+                            return $http.post(domain.qiniuUpload, fd, {
+                                // withCredentials: true,
+                                headers: { 'Content-Type': undefined },
+                                transformRequest: angular.identity
+                            })
+                        })
+                            .then(function (rs) {
+                                alert(angular.toJson(rs.data));
+                                alert('上传文件成功');
+                                XuntongJSBridge.call('previewImage',
+                                    {
+                                        current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
+                                        urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
+                                    }, function (result) {
+
+                                    }
+                                );
+                            }).catch(function (e) {
+                                alert('失败！');
+                                alert(angular.toJson(e));
+                            });
                         // document.body.appendChild(canvas);
-                    })
+                    });
 
                     // domtoimage.toBlob(node)
                     //             .then(function (blob) {
@@ -291,22 +306,8 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                     //                     transformRequest: angular.identity
                     //                 })
                     //             })
-                                .then(function (rs) {
-                                    alert(angular.toJson(rs.data));
-                                    alert('上传文件成功');
-                                    XuntongJSBridge.call('previewImage',
-                                        {
-                                            current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
-                                            urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
-                                        }, function (result) {
 
-                                        }
-                                    );
-                                }).catch(function (e) {
-                                    alert('失败！');
-                                    alert(angular.toJson(e));
-                                });
-                       
+
 
                 }
             }
