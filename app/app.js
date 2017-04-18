@@ -145,8 +145,10 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                     var node;
                     if (document.getElementById('ui-container-form')) node = document.getElementById('ui-container-form');
                     else node = document.getElementsByTagName('html')[0];
+                    alert('获取网页节点ok');
                     domtoimage.toBlob(node)
                         .then(function (blob) {
+                            alert('已经到了生成数据的时候');
                             fd.append("token", upload_token);
                             fd.append("file", blob);
                             return $http.post(domain.qiniuUpload, fd, {
