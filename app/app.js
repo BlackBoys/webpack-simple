@@ -128,7 +128,6 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
             if (result.success == true || result.success == 'true') {
                 var callBackId = result.data ? result.data.callBackId : '';
                 if (callBackId == 'callback1') {
-                    alert('test');
                     var putPolicy = {
                         scope: 'cloudhub',
                         deadline: Date.now() + 3600 * 60,
@@ -156,6 +155,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                                 transformRequest: angular.identity
                             })
                         }).then(function (rs) {
+                            alert(angular.toJson(rs.data));
                             XuntongJSBridge.call('previewImage',
                                 {
                                     current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
