@@ -293,6 +293,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                     //             })
                                 .then(function (rs) {
                                     alert(angular.toJson(rs.data));
+                                    alert('上传文件成功');
                                     XuntongJSBridge.call('previewImage',
                                         {
                                             current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
