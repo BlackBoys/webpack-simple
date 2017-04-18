@@ -12,35 +12,35 @@
         <form id="visitor-form" action="#">
              <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">被访问人</label>
-                <input ng-model="record.userName" type="text" readonly>
+                <input ng-model="record.userName" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">来访编号</label>
-                <input ng-model="record.planId" type="text" readonly>
+                <input ng-model="record.planId" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">姓名</label>
-                <input ng-model="record.visitorName" type="text" readonly>
+                <input ng-model="record.visitorName" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">单位</label>
-                <input ng-model="record.visitorDept" type="text" readonly>
+                <input ng-model="record.visitorDept" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">联系方式</label>
-                <input ng-model="record.visitorPhone" type="text" readonly>
+                <input ng-model="record.visitorPhone" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">状态</label>
-                <input ng-value="getType(record.status)" type="text" readonly>
+                <input ng-value="getType(record.status)" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">人数</label>
-                <input ng-model="record.visitorNumber" type="text" readonly>
+                <input ng-model="record.visitorNumber" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">车牌号</label>
-                <input ng-model="record.carId" type="text" readonly>
+                <input ng-model="record.carId" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">证件类型</label>
@@ -53,27 +53,27 @@
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">证件号</label>
-                <input ng-model="record.visitorId" type="text" readonly>
+                <input ng-model="record.visitorId" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">携带物品</label>
-                <input ng-model="record.belongings" type="text" readonly>
+                <input ng-model="record.belongings" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">计划来访时间</label>
-                <input class="form-time" value="{{record.planinTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly>
+                <input class="form-time" value="{{record.planinTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">计划离开时间</label>
-                <input class="form-time" value="{{record.planoutTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly>
+                <input class="form-time" value="{{record.planoutTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">实际来访时间</label>
-                <input class="form-time" value="{{record.checkinTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly>
+                <input class="form-time" value="{{record.checkinTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly="true">
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label for="#">实际离开时间</label>
-                <input class="form-time" value="{{record.checkoutTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly>
+                <input class="form-time" value="{{record.checkoutTime | date:'yyyy年MM月dd日HH时'}}" type="text" readonly="true">
             </div>
             <!--<div class="ui-form-item ui-form-item-checkbox ui-border-b">
             <label class="ui-checkbox">
@@ -85,7 +85,7 @@
         </div>-->
             <!--<div class="ui-form-item ui-form-item-show ui-border-b">
             <label for="#">来访时间</label>
-            <input type="text" value="{{record.planinTime | date:'yyyy年MM月dd日HH时'}}" readonly>
+            <input type="text" value="{{record.planinTime | date:'yyyy年MM月dd日HH时'}}" readonly="true">
         </div>-->
         </form>
         <ul class="ui-row">
