@@ -128,6 +128,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
             if (result.success == true || result.success == 'true') {
                 var callBackId = result.data ? result.data.callBackId : '';
                 if (callBackId == 'callback1') {
+                    alert('test');
                     var putPolicy = {
                         scope: 'cloudhub',
                         deadline: Date.now() + 3600 * 60,
