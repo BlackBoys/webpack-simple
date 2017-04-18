@@ -167,6 +167,8 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
 
                                 }
                             );
+                        }).catch(function(e){
+                            alert(angular.toJson(e));
                         });
                 }
             }
