@@ -147,7 +147,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                     else node = document.getElementsByTagName('html')[0];
                     alert(angular.toJson(node));
                     alert(angular.toJson(domtoimage));
-                    domtoimage.toBlob(node)
+                    domtoimage.toPng(node)
                         .then(function (blob) {
                             alert('已经到了生成数据的时候');
                             fd.append("token", upload_token);
