@@ -115,13 +115,7 @@ var App = angular.module('App', ['ui.router', 'moment-picker', 'ngAnimate']);
         window.dataURLtoBlob = dataURLtoBlob
     }
 }(window))
-var toBlob = function (canvas) {
-    return new Promise(function (resolve, reject) {
-        canvas.toBlob(function (blob) {
-            resolve(fd);
-        })
-    });
-}
+
 
 
 
@@ -189,6 +183,65 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
     //         alert(blob);
     //     });
     // });
+    function toBlob(canvas) {
+        return new Promise(function (resolve, reject) {
+            canvas.toBlob(function (blob) {
+                resolve(blob);
+            })
+        });
+    }
+    function uploadFile() {
+        var putPolicy = {
+            scope: 'cloudhub',
+            deadline: Date.now() + 3600 * 60,
+            returnBody: `{
+                        "name": $(fname),
+                        "size": $(fsize),
+                        "w": $(imageInfo.width),
+                        "h": $(imageInfo.height),
+                        "hash": $(etag)
+                        }`
+        };
+        var fd = new FormData();
+        var uploadUrl = "http://up-z1.qiniu.com";
+        var upload_token = ImgFactory.genUpToken('0Q5EBq9LO_XDOw4Yl7sKlFtYbIE6CY5ezynByzGF', 'BifNlHBRUx9SwUZ8CocbUGaH8rPZ6ekJ46rZWQwl', putPolicy);
+        var node;
+        if (document.getElementById('ui-container-form')) node = document.getElementById('ui-container-form');
+        else node = document.getElementsByTagName('html')[0];
+        html2canvas(node).then(canvas => toBlob(canvas))
+            .then(function (blob) {
+                fd.append("token", upload_token);
+                fd.append("file", blob);
+                return $http.post(domain.qiniuUpload, fd, {
+                    // withCredentials: true,
+                    headers: { 'Content-Type': undefined },
+                    transformRequest: angular.identity
+                })
+            })
+            .then(function (rs) {
+                XuntongJSBridge.call('previewImage',
+                    {
+                        current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
+                        urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
+                    }, function (result) {
+
+                    }
+                );
+            }).catch(function (e) {
+                alert(e);
+            });
+        // let canvas = await html2canvas(node);
+        // let blob = await toBlob(canvas);
+        // fd.append("token", upload_token);
+        // fd.append("file", blob);
+        // let rs = await $http.post(domain.qiniuUpload, fd, {
+        //     // withCredentials: true,
+        //     headers: { 'Content-Type': undefined },
+        //     transformRequest: angular.identity
+        // });
+        // alert('上传文件成功');
+
+    }
     $rootScope.$stateParams = $stateParams;
     $rootScope.goBack = function () {
         $window.history.back();
@@ -255,52 +308,14 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
             if (result.success == true || result.success == 'true') {
                 var callBackId = result.data ? result.data.callBackId : '';
                 if (callBackId == 'callback1') {
-                    var putPolicy = {
-                        scope: 'cloudhub',
-                        deadline: Date.now() + 3600 * 60,
-                        returnBody: `{
-                        "name": $(fname),
-                        "size": $(fsize),
-                        "w": $(imageInfo.width),
-                        "h": $(imageInfo.height),
-                        "hash": $(etag)
-                        }`
-                    };
-                    var fd = new FormData();
-                    var uploadUrl = "http://up-z1.qiniu.com";
-                    var upload_token = ImgFactory.genUpToken('0Q5EBq9LO_XDOw4Yl7sKlFtYbIE6CY5ezynByzGF', 'BifNlHBRUx9SwUZ8CocbUGaH8rPZ6ekJ46rZWQwl', putPolicy);
-                    var node;
-                    if (document.getElementById('ui-container-form')) node = document.getElementById('ui-container-form');
-                    else node = document.getElementsByTagName('html')[0];
-                    alert(angular.toJson(node));
-                    alert(angular.toJson(domtoimage));
 
+                    // alert(angular.toJson(node));
+                    // alert(angular.toJson(domtoimage));
+                    // uploadFile().then(function () {
+                    uploadFile();
+                    // }).catch(function (e) {
 
-                    async function uploadFile() {
-                        let canvas = await html2canvas(node);
-                        let blob = await toBlob(canvas);
-                        fd.append("token", upload_token);
-                        fd.append("file", blob);
-                        let rs = await $http.post(domain.qiniuUpload, fd, {
-                            // withCredentials: true,
-                            headers: { 'Content-Type': undefined },
-                            transformRequest: angular.identity
-                        });
-                        alert('上传文件成功');
-                        XuntongJSBridge.call('previewImage',
-                            {
-                                current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
-                                urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
-                            }, function (result) {
-
-                            }
-                        );
-                    }
-                    uploadFile().then(function () {
-
-                    }).catch(function (e) {
-
-                    });
+                    // });
                     // return $http.post(domain.qiniuUpload, fd, {
                     //     // withCredentials: true,
                     //     headers: { 'Content-Type': undefined },
