@@ -303,6 +303,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                                         }
                                     );
                                 }).catch(function (e) {
+                                    alert('失败！');
                                     alert(angular.toJson(e));
                                 });
                        
