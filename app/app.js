@@ -175,12 +175,12 @@ angular.module("App").config(['$stateProvider', '$urlRouterProvider', '$httpProv
 angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stateParams', 'ImgFactory', 'domain', '$http', 'principal', 'authorization', function ($rootScope, $window, $state, $timeout, $stateParams, ImgFactory, domain, $http, principal, authorization) {
     html2canvas(document.body).then(function (canvas) {
         console.dir(canvas);
-        // alert(canvas.toDataURL());
+        alert(canvas.toDataURL());
         // canvas.toBlob(function(blob) {
         //     alert(blob);
         // });
-        document.body.appendChild(canvas);
-        alert(document.getElementsByTagName('canvas')[0].toDataURL());
+        // document.body.appendChild(canvas);
+        // alert(document.getElementsByTagName('canvas')[0].toDataURL());
     });
     $rootScope.$stateParams = $stateParams;
     $rootScope.goBack = function () {
