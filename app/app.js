@@ -115,6 +115,16 @@ var App = angular.module('App', ['ui.router', 'moment-picker', 'ngAnimate']);
         window.dataURLtoBlob = dataURLtoBlob
     }
 }(window))
+var toBlob = function (canvas) {
+    return new Promise(function (resolve, reject) {
+        canvas.toBlob(function (blob) {
+            resolve(fd);
+        })
+    });
+}
+
+
+
 angular.module("App").config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
     // Redirect any unmatched url
     $httpProvider.interceptors.push('myHttpInterceptor');
@@ -173,13 +183,12 @@ angular.module("App").config(['$stateProvider', '$urlRouterProvider', '$httpProv
 
 
 angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stateParams', 'ImgFactory', 'domain', '$http', 'principal', 'authorization', function ($rootScope, $window, $state, $timeout, $stateParams, ImgFactory, domain, $http, principal, authorization) {
-    html2canvas(document.body).then(function (canvas) {
-        console.dir(canvas);
-        canvas.toBlob(function (blob) {
-            alert(blob);
-        });
-        // document.body.appendChild(canvas);
-    });
+    // html2canvas(document.body).then(function (canvas) {
+    //     console.dir(canvas);
+    //     canvas.toBlob(function (blob) {
+    //         alert(blob);
+    //     });
+    // });
     $rootScope.$stateParams = $stateParams;
     $rootScope.goBack = function () {
         $window.history.back();
@@ -265,35 +274,66 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                     else node = document.getElementsByTagName('html')[0];
                     alert(angular.toJson(node));
                     alert(angular.toJson(domtoimage));
-                    html2canvas(node).then(function (canvas) {
-                        console.dir(canvas);
-                        canvas.toBlob(function (blob) {
-                            alert(blob);
-                            fd.append("token", upload_token);
-                            fd.append("file", blob);
-                            return $http.post(domain.qiniuUpload, fd, {
-                                // withCredentials: true,
-                                headers: { 'Content-Type': undefined },
-                                transformRequest: angular.identity
-                            })
-                        })
-                            .then(function (rs) {
-                                alert(angular.toJson(rs.data));
-                                alert('上传文件成功');
-                                XuntongJSBridge.call('previewImage',
-                                    {
-                                        current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
-                                        urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
-                                    }, function (result) {
 
-                                    }
-                                );
-                            }).catch(function (e) {
-                                alert('失败！');
-                                alert(angular.toJson(e));
-                            });
-                        // document.body.appendChild(canvas);
+
+                    async function uploadFile() {
+                        let canvas = await html2canvas(node);
+                        let blob = await toBlob(canvas);
+                        fd.append("token", upload_token);
+                        fd.append("file", blob);
+                        let rs = await $http.post(domain.qiniuUpload, fd, {
+                            // withCredentials: true,
+                            headers: { 'Content-Type': undefined },
+                            transformRequest: angular.identity
+                        });
+                        alert('上传文件成功');
+                        XuntongJSBridge.call('previewImage',
+                            {
+                                current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
+                                urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
+                            }, function (result) {
+
+                            }
+                        );
+                    }
+                    uploadFile().then(function () {
+
+                    }).catch(function (e) {
+
                     });
+                    // return $http.post(domain.qiniuUpload, fd, {
+                    //     // withCredentials: true,
+                    //     headers: { 'Content-Type': undefined },
+                    //     transformRequest: angular.identity
+                    // })
+                    // html2canvas(node).then(function (canvas) {
+                    //     console.dir(canvas);
+                    //     canvas.toBlob(function (blob) {
+                    //         alert(blob);
+                    //         fd.append("token", upload_token);
+                    //         fd.append("file", blob);
+                    //         return $http.post(domain.qiniuUpload, fd, {
+                    //             // withCredentials: true,
+                    //             headers: { 'Content-Type': undefined },
+                    //             transformRequest: angular.identity
+                    //         })
+                    //     })
+                    //         .then(function (rs) {
+                    //             alert(angular.toJson(rs.data));
+                    //             alert('上传文件成功');
+                    //             XuntongJSBridge.call('previewImage',
+                    //                 {
+                    //                     current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
+                    //                     urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
+                    //                 }, function (result) {
+
+                    //                 }
+                    //             );
+                    //         }).catch(function (e) {
+                    //             alert('失败！');
+                    //             alert(angular.toJson(e));
+                    //         });
+                    // });
 
                     // domtoimage.toBlob(node)
                     //             .then(function (blob) {
