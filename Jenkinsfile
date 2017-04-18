@@ -4,7 +4,7 @@ pipeline {
     stage('build') {
       steps {
         parallel(
-          "compile": {
+          "test": {
             sh 'npm run build'
             
           },
@@ -18,6 +18,7 @@ pipeline {
     stage('tonginx') {
       steps {
         sh 'cp -rf ./dist/* /zhongheng'
+        timestamps()
       }
     }
   }
