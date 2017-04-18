@@ -190,7 +190,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
             })
         });
     }
-    function uploadFile() {
+    async function uploadFile() {
         var putPolicy = {
             scope: 'cloudhub',
             deadline: Date.now() + 3600 * 60,
@@ -208,39 +208,24 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
         var node;
         if (document.getElementById('ui-container-form')) node = document.getElementById('ui-container-form');
         else node = document.getElementsByTagName('html')[0];
-        html2canvas(node).then(canvas => toBlob(canvas))
-            .then(function (blob) {
-                fd.append("token", upload_token);
-                fd.append("file", blob);
-                return $http.post(domain.qiniuUpload, fd, {
-                    // withCredentials: true,
-                    headers: { 'Content-Type': undefined },
-                    transformRequest: angular.identity
-                })
-            })
-            .then(function (rs) {
-                XuntongJSBridge.call('previewImage',
-                    {
-                        current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
-                        urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
-                    }, function (result) {
+        let canvas = await html2canvas(node);
+        let blob = await toBlob(canvas);
+        fd.append("token", upload_token);
+        fd.append("file", blob);
+        let rs = await $http.post(domain.qiniuUpload, fd, {
+            // withCredentials: true,
+            headers: { 'Content-Type': undefined },
+            transformRequest: angular.identity
+        });
+        alert('上传文件成功');
+        XuntongJSBridge.call('previewImage',
+            {
+                current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
+                urls: [`${domain.qiniuDownload}/${rs.data.hash}`] // 需要预览的图片http链接列表
+            }, function (result) {
 
-                    }
-                );
-            }).catch(function (e) {
-                alert(e);
-            });
-        // let canvas = await html2canvas(node);
-        // let blob = await toBlob(canvas);
-        // fd.append("token", upload_token);
-        // fd.append("file", blob);
-        // let rs = await $http.post(domain.qiniuUpload, fd, {
-        //     // withCredentials: true,
-        //     headers: { 'Content-Type': undefined },
-        //     transformRequest: angular.identity
-        // });
-        // alert('上传文件成功');
-
+            }
+        );
     }
     $rootScope.$stateParams = $stateParams;
     $rootScope.goBack = function () {
@@ -311,11 +296,11 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
 
                     // alert(angular.toJson(node));
                     // alert(angular.toJson(domtoimage));
-                    // uploadFile().then(function () {
-                    uploadFile();
-                    // }).catch(function (e) {
+                    uploadFile().then(function () {
 
-                    // });
+                    }).catch(function (e) {
+
+                    });
                     // return $http.post(domain.qiniuUpload, fd, {
                     //     // withCredentials: true,
                     //     headers: { 'Content-Type': undefined },
