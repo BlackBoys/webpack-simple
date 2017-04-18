@@ -217,7 +217,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
             headers: { 'Content-Type': undefined },
             transformRequest: angular.identity
         });
-        alert('上传文件成功');
+        // alert('上传文件成功');
         XuntongJSBridge.call('previewImage',
             {
                 current: `${domain.qiniuDownload}/${rs.data.hash}`, // 当前显示图片的http链接
