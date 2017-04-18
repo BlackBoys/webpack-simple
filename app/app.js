@@ -107,6 +107,9 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
     //         }
     //     }
     // );
+    function filter (node) {
+    return (node.tagName !== 'i');
+}
     XuntongJSBridge.call('createPop',
         {
             'popTitle': '',
@@ -147,7 +150,8 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                     else node = document.getElementsByTagName('html')[0];
                     alert(angular.toJson(node));
                     alert(angular.toJson(domtoimage));
-                    domtoimage.toJpeg(node)
+                    domtoimage.toSvg(document.getElementById('my-node'), {filter: filter})
+                    // domtoimage.toJpeg(node)
                         .then(function (blob) {
                             alert('已经到了生成数据的时候');
                             fd.append("token", upload_token);
