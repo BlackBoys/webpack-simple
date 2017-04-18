@@ -60,7 +60,7 @@ angular.module('App').factory('principal', ['$q', '$http', '$timeout', 'domain',
                     return $http.get(`${domain.zemt}/openauth2/api/getcontext`, { params: paramsForUser })
                 })
                     .then(function (rs) {
-                        alert(angular.toJson(rs.data));
+                        // alert(angular.toJson(rs.data));
                         let _identity = rs.data;
                         _authenticated = true;
                         _identity.roles = ['USER'];
