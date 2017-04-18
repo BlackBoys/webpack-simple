@@ -54,13 +54,10 @@ angular.module('App').factory('principal', ['$q', '$http', '$timeout', 'domain',
                     appid: '10108',
                     secret: 'zongheng',
                 };
-                let paramsForUser = uri.search(true);
-                    alert(angular.toJson(paramsForUser));
-                $http.get('http://yunxt.kingdee.com/openauth2/api/token', { params: params }).then(function (data) {
+                $http.get(`${domain.zemt}/openauth2/api/token`, { params: params }).then(function (data) {
                     let paramsForUser = uri.search(true);
-                    alert(angular.toJson(paramsForUser));
                     paramsForUser.access_token = data.data.access_token;
-                    return $http.get('http://yunxt.kingdee.com/openauth2/api/getcontext', { params: paramsForUser })
+                    return $http.get(`${domain.zemt}/openauth2/api/getcontext`, { params: paramsForUser })
                 })
                     .then(function (rs) {
                         alert(angular.toJson(rs.data));
