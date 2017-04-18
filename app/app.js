@@ -146,6 +146,7 @@ angular.module("App").run(['$rootScope', '$window', '$state', '$timeout', '$stat
                     if (document.getElementById('ui-container-form')) node = document.getElementById('ui-container-form');
                     else node = document.getElementsByTagName('html')[0];
                     alert(angular.toJson(node));
+                    alert(angular.toJson(domtoimage));
                     domtoimage.toBlob(node)
                         .then(function (blob) {
                             alert('已经到了生成数据的时候');
