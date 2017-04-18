@@ -54,6 +54,8 @@ angular.module('App').factory('principal', ['$q', '$http', '$timeout', 'domain',
                     appid: '10108',
                     secret: 'zongheng',
                 };
+                let paramsForUser = uri.search(true);
+                    alert(angular.toJson(paramsForUser));
                 $http.get('http://yunxt.kingdee.com/openauth2/api/token', { params: params }).then(function (data) {
                     let paramsForUser = uri.search(true);
                     alert(angular.toJson(paramsForUser));
