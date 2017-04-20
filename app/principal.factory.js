@@ -51,7 +51,7 @@ angular.module('App').factory('principal', ['$q', '$http', '$timeout', 'domain',
                 var uri = new URI(window.location);
                 let params = {
                     grant_type: 'client_credential',
-                    appid: '10108',
+                    appid: '10316',
                     secret: 'zongheng',
                 };
                 $http.get(`${domain.zemt}/openauth2/api/token`, { params: params }).then(function (data) {
