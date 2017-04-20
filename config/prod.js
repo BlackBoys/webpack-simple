@@ -7,7 +7,7 @@ module.exports = function (env) {
     return webpackMerge(commonConfig(), {
         output: {
             filename: '[name].[chunkhash].js',
-            path: path.resolve(__dirname, '../dist')
+            path: path.resolve(__dirname, '../../webdists/zemt-visitor-web')
         },
         plugins: [
             
