@@ -10,3 +10,13 @@
 #dashboard ul {
     margin-top: 48px;
 }
+
+
+img.header-img{
+    height: 100%;
+}
+
+h5.cp{
+    line-height: 56px;
+    text-align: center;
+}

@@ -1,9 +1,18 @@
-<header class="ui-header ui-header-positive ui-border-b">
+<header class="ui-header ui-header-stable ui-border-b">
     <!--<i class="ui-icon-return" ng-click="goBack()"></i>-->
-    <h1>访客管理-ZHJD</h1>
+    <!--<h1>访客管理-ZHJD</h1>-->
+    <img class="header-img" src="https://bpm.zemt.cn/img/login.png" alt="">
     <!--<button class="ui-btn">回首页</button>-->
 </header>
-<section id="dashboard" class="ui-container">
+<footer class="ui-footer ui-footer-stable ui-border-t">
+    <h5 class="cp">北京纵横机电</h5> 
+    <!--<ul class="ui-tiled">
+        <li><div>菜单</div><i>1</i></li>
+        <li><div>菜单</div><i>2</i></li>
+        <li><div>菜单</div><i>3</i></li>
+    </ul>-->
+</footer>
+<!--<section id="dashboard" class="ui-container">
     <ul class="ui-row ui-whitespace dashboard-content">
         <li class="ui-col ui-col-50"><button ui-sref="visitor-apply" class="ui-btn-lg ui-btn-primary">
         访客申请
@@ -24,4 +33,62 @@
         帮助
     </button></li>
     </ul>
+</section>-->
+<section class="ui-container" id="dashboard-list">
+<ul class="ui-list ui-list-one ui-list-link ui-border-tb">
+    <li class="ui-border-t" ui-sref="visitor-apply">
+        <div class="ui-list-icon">
+            <span style="background-image:url(https://bpm.zemt.cn/img/wodeyiban32.png)"></span>
+        </div>
+        <div class="ui-list-info">
+            <h4 class="ui-nowrap">访客申请</h4>
+            <!--<div class="ui-txt-info">男</div>-->
+        </div>
+    </li>
+    <li class="ui-border-t" ui-sref="visiting-records">
+        <div class="ui-list-icon">
+            <span style="background-image:url(https://bpm.zemt.cn/img/wodegaozhi32.png)"></span>
+        </div>
+        <div class="ui-list-info">
+            <h4 class="ui-nowrap">来访记录</h4>
+            <!--<div class="ui-txt-info">男</div>-->
+        </div>
+    </li>
+    <li class="ui-border-t" ng-click="scan('register')">
+        <div class="ui-list-icon">
+            <span style="background-image:url(https://bpm.zemt.cn/img/Mydo32.png)"></span>
+        </div>
+        <div class="ui-list-info">
+            <h4 class="ui-nowrap">扫码登记</h4>
+            <!--<div class="ui-txt-info">男</div>-->
+        </div>
+    </li>
+    <li class="ui-border-t" ui-sref="code-log">
+        <div class="ui-list-icon">
+            <span style="background-image:url(https://bpm.zemt.cn/img/wodeyitijiao32.png)"></span>
+        </div>
+        <div class="ui-list-info">
+            <h4 class="ui-nowrap">编码登记</h4>
+            <!--<div class="ui-txt-info">男</div>-->
+        </div>
+    </li>
+    <li class="ui-border-t" ng-click="scan('leave')">
+        <div class="ui-list-icon">
+            <span style="background-image:url(https://bpm.zemt.cn/img/Mydo32.png)"></span>
+        </div>
+        <div class="ui-list-info">
+            <h4 class="ui-nowrap">扫码离开</h4>
+            <!--<div class="ui-txt-info">男</div>-->
+        </div>
+    </li>
+    <!--<li class="ui-border-t">
+        <div class="ui-list-thumb">
+            <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+        </div>
+        <div class="ui-list-info">
+            <h4 class="ui-nowrap">生日</h4>
+            <div class="ui-reddot ui-reddot-static"></div>
+        </div>
+    </li>-->
+</ul>
 </section>
