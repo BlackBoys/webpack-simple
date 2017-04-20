@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import "font-awesome/css/font-awesome.css";
 // import "jquery";
 // import "imports-loader?$=jquery!select2";
 // import "select2/dist/css/select2.css"
