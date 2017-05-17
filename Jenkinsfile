@@ -15,14 +15,8 @@ pipeline {
         )
       }
     }
-    stage('tonginx') {
-      steps {
-        sh 'cp -rf ./dist/* /zhongheng'
-        timestamps()
-      }
-    }
   }
   tools {
-    nodejs 'node6.10.0'
+    nodejs 'node7.10.0'
   }
 }
